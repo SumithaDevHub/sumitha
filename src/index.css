@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Neon grid background with wavy animation */
+body {
+  @apply bg-[#0a0a0f] text-white; /* deep near-black with slight blue tint */
+  background-image:
+    /* primary grid - neon green */
+    linear-gradient(rgba(0, 255, 136, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.12) 1px, transparent 1px),
+    /* secondary grid - neon purple, bigger spacing */
+    linear-gradient(rgba(174, 84, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(174, 84, 255, 0.08) 1px, transparent 1px);
+  
+  background-size: 40px 40px, 40px 40px, 80px 80px, 80px 80px;
+  animation: moveGridWavy 7s ease-in-out infinite;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* subtle glow on the whole body */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(174, 84, 255, 0.15), transparent 70%);
+  z-index: 0;
+}
+
+@keyframes moveGridWavy {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+  25% {
+    background-position:
+      10px 5px,
+      10px 5px,
+      20px 10px,
+      20px 10px;
+  }
+  50% {
+    background-position:
+      0 10px,
+      0 10px,
+      0 20px,
+      0 20px;
+  }
+  75% {
+    background-position:
+      -10px 5px,
+      -10px 5px,
+      -20px 10px,
+      -20px 10px;
+  }
+  100% {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* For WebKit browsers */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(74, 222, 128, 0.6);
+  border-radius: 3px;
+}
+
+/* For Firefox */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74, 222, 128, 0.6) transparent;
+}
